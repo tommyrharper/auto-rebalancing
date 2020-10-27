@@ -18,6 +18,10 @@ class AutoBalancer
     @btc = cash.to_f / btcPrice.to_f
     @btcValue = @btc * @btcPrice
     @total = @btcValue + @cash
+    returnResults()
+  end
+
+  def returnResults
     {
       "cash" => @cash,
       "btc" => @btc,
@@ -30,4 +34,13 @@ class AutoBalancer
 end
 
 balancer = AutoBalancer.new
+updateValue = 100
 
+for i in 0...1000
+  balancer.updateBtcPrice(updateValue)
+  balancer.updateBtcPrice(-updateValue)
+  balancer.updateBtcPrice(-updateValue)
+  balancer.updateBtcPrice(updateValue)
+end
+
+puts balancer.returnResults()
